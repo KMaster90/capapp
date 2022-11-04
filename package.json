@@ -1,0 +1,22 @@
+{
+  "name": "capapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "tsc -w & tscp -w & nodemon --watch '*.ts' dist/app.js",
+    "build": "tsc --build",
+    "clean": "rimraf dist/"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.14",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "typescript-cp": "^0.1.6"
+  }
+}
