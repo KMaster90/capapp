@@ -1,5 +1,5 @@
 import AppError from "./appError";
-import { Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 const sendErrorDev = (err: AppError, res: Response) => {
   res.status(err.statusCode).json({
@@ -10,7 +10,12 @@ const sendErrorDev = (err: AppError, res: Response) => {
   });
 };
 
-const globalErrorHandler = (err: AppError, res: Response) => {
+const globalErrorHandler = (
+  err: AppError,
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
   err.statusCode = err.statusCode || 500;
   err.status = err.status || "error";
 
