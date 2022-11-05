@@ -26,17 +26,37 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const express_1 = __importStar(require("express"));
-const cors_1 = __importDefault(require("cors"));
-const path_1 = __importDefault(require("path"));
-const path_2 = require("./utils/path");
-const app = (0, express_1.default)();
-app.use((0, cors_1.default)({
-    origin: ["http://localhost:4200"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    credentials: true,
-}));
-app.use((0, express_1.json)());
-app.use((0, express_1.urlencoded)({ extended: false }));
-app.use(express_1.default.static(path_1.default.join(path_2.rootDir, "public")));
-exports.default = app;
+const mongoose_1 = __importDefault(require("mongoose"));
+const app_1 = __importDefault(require("./app"));
+const dotenv = __importStar(require("dotenv"));
+dotenv.config({ path: __dirname + "/.env" });
+const DB = process.env.DATABASE;
+const port = process.env.PORT;
+const server = app_1.default.listen(port, () => console.log(`App running on port ${port}`));
+mongoose_1.default
+    .connect(DB)
+    .then(() => {
+    console.log("Database connection successfull");
+})
+    .catch(() => {
+    console.log("Connection Error");
+    process.exit(1);
+});
+process.on("uncaughtException", (err) => {
+    console.log("UNHANDLED EXCEPTION! Shutting down..");
+    console.log(err.name, err.message);
+    process.exit(1);
+});
+process.on("unhandledRejection", (err) => {
+    console.log("UNHANDLED REJECTION! Shutting down..");
+    console.log(err.name, err.message);
+    server.close(() => {
+        process.exit(1);
+    });
+});
+process.on("SIGTERM", () => {
+    console.log("SIGTERM RECEIVED. Shutting down...");
+    server.close(() => {
+        console.log("Process terminated!");
+    });
+});
