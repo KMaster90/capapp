@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start:compile": "tsc -w & tscp -w",
-    "start:dev": "nodemon --watch '*.ts' dist/server.js",
+    "start:compile": "tsc -w && tscp -w",
+    "start:dev": "nodemon --watch '*.js' dist/server.js",
     "build": "tsc --build",
     "clean": "rimraf dist/"
   },
