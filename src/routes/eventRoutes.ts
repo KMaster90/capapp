@@ -8,3 +8,4 @@ router.route("/")
     .get(eventControllers.getAllEvents);
 
 export default router;
+

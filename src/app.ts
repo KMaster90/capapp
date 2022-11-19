@@ -4,6 +4,7 @@ import path from "path";
 import { rootDir } from "./utils/path";
 import eventRoutes from "./routes/eventRoutes";
 import globalErrorHandler from "./utils/globalErrorHandler";
+import interestRoutes from "./routes/interestRoutes";
 
 const app = express();
 
@@ -21,6 +22,7 @@ app.use(urlencoded({ extended: false }));
 app.use(express.static(path.join(rootDir, "public")));
 
 app.use("/api/v1/events", eventRoutes);
+app.use("/api/v1/interests", interestRoutes);
 
 app.use(globalErrorHandler);
 

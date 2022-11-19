@@ -1,4 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, {Schema, Types} from "mongoose";
+import Interest from "./interestModel";
+import InterestModel from "./interestModel";
 
 const eventSchema = new mongoose.Schema({
     title: {
@@ -14,11 +16,11 @@ const eventSchema = new mongoose.Schema({
     address: {
         type: {
             city: {type: String, required: [true, "City field is required"]},
-            country: {type: String, required: [true, "Country field is required"]},
+            // country: {type: String, required: [true, "Country field is required"]},
             formatted: {type: String},
             lat: {type: Number, required: [true, "Lat field is required"]},
             lng: {type: Number, required: [true, "Lng field is required"]},
-            number: {type: Number, required: [true, "Number field is required"]},
+            streetNumber: {type: Number, required: [true, "Number field is required"]},
             state: {type: String, required: [true, "State field is required"]},
             street: {type: String, required: [true, "Street field is required"]},
             zip: {type: String, required: [true, "Zip field is required"]}
@@ -26,10 +28,7 @@ const eventSchema = new mongoose.Schema({
         required: [true, "Address field is required"],
     },
     interestListSelected: {
-        type: {
-            label: {type: String, required: [true, "Label field is required"]},
-            icon: {type: String, required: [true, "Icon field is required"]}
-        },
+        type: [Interest.schema],
         required: [true, "InterestListSelected field is required"],
     },
     seats: {
