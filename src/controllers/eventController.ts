@@ -3,6 +3,8 @@ import Event from "../models/eventModel";
 import AppError from "../utils/appError";
 import catchAsync from "../utils/catchAsync";
 import successRes from "../utils/succesRes";
+import {imageUpload} from "../services/image-upload";
+import {v4} from 'uuid';
 
 export const getAllEvents = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -20,6 +22,7 @@ export const getOneEvent = catchAsync(
 
 export const createEvent = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
+      req.body.image = imageUpload(req.body.image, v4());
     const newEvent = await Event.create(req.body);
     successRes(res, newEvent);
   }
