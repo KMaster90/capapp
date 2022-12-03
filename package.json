@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "start": "node dist/server.js --port=3000",
     "start:compile": "tsc -w && tscp -w",
     "start:dev": "nodemon --inspect --watch '*.js' dist/server.js --port=3000",
     "build": "tsc --build",
