@@ -1,4 +1,4 @@
-import express, { json, urlencoded } from "express";
+import express from "express";
 import cors from "cors";
 import path from "path";
 import { rootDir } from "./utils/path";
