@@ -1,6 +1,5 @@
 import mongoose, {Schema, Types} from "mongoose";
 import Interest from "./interestModel";
-import InterestModel from "./interestModel";
 
 const eventSchema = new mongoose.Schema({
     title: {

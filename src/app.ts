@@ -10,7 +10,7 @@ const app = express();
 
 app.use(
   cors({
-    origin: ["http://localhost:8100","http://localhost"],
+    origin: ["http://localhost:8100","http://localhost","https://onlife-b16e3.web.app"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   })
